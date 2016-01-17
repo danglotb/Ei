@@ -15,11 +15,6 @@ public class Graph {
 		this.graph.add(new Node(node));
 	}
 
-	public Graph(ArrayList<Node> nodes) {
-		this.graph = new ArrayList<Node>();
-		this.graph.addAll(nodes);
-	}
-
 	public Graph copy() {
 		Graph g = new Graph();
 		for (Node n : this.graph) {
@@ -27,13 +22,13 @@ public class Graph {
 		}
 		return g;
 	}
-	
-	public boolean equals(Graph that) {
-		return this.graph.equals(that.graph);
-	}
 
 	public void addNode(String name) {
 		this.graph.add(new Node(name));
+	}
+	
+	public void addEdge(String n1, String path, String n2) {
+		this.getNode(n1).addEdge(path, this.getNode(n2));
 	}
 
 	public Node getNode(String name) {
@@ -44,20 +39,8 @@ public class Graph {
 		return null;
 	}
 
-	public void addEdge(String n1, String path, String n2) {
-		this.getNode(n1).addEdge(path, this.getNode(n2));
-	}
-
 	public ArrayList<Node> getNodes() {
 		return this.graph;
-	}
-
-	public ArrayList<Edge> getEdges() {
-		ArrayList<Edge> edges = new ArrayList<Edge>();
-		for (Node n : graph) {
-			edges.addAll(n.getEdges());
-		}
-		return edges;
 	}
 
 	public ArrayList<String> getNames() {

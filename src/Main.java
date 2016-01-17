@@ -8,15 +8,10 @@ import rule.Rule;
 public class Main {
 
 	public static void main(String[] args) {
-		Graph g = new Graph();
 		
-		for (int i = 0 ; i < 7 ; i++) {
-			g.addNode(i+"");
-		}
+		Graph g = io.GraphReader.read("graph");
 		
-		for (int i = 0 ; i < 6 ; i++) {
-			g.addEdge(i+"", "E", (i+1)+"");
-		}
+		System.out.println(g);
 		
 		Rule r1 = new Rule("x", "p1" , "y");
 		r1.addFact("x", "E", "z");
