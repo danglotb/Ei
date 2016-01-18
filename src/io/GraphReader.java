@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import core.Graph;
+import core.Node;
 
 public class GraphReader {
 	
@@ -26,15 +27,19 @@ public class GraphReader {
 				sc.useDelimiter("\t");
 				
 				String n1 = sc.next();
-				g.addNode(n1);
+				
+				if(g.getNode(n1) == null)
+					g.addNode(n1);
 				
 				try {
 					String edge = sc.next();
 					String n2 = sc.next();
-					g.addEdge(n1, edge, n2);
+					
+					if ( (g.getNode(n2)) == null)
+						g.addNode(n2);
+					g.getNode(n1).addEdge(edge, g.getNode(n2));
 				} catch (NoSuchElementException e) {
 					//No need to had Edge so
-					g.addNode(n1);
 				}
 				
 				sc.close();
