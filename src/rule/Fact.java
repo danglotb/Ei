@@ -3,6 +3,7 @@ package rule;
 import java.util.HashMap;
 
 import core.Graph;
+import core.Node;
 
 public class Fact {
 	
@@ -23,9 +24,14 @@ public class Fact {
 		return this.n2;
 	}
 	
-	public boolean isValid(Graph g, HashMap<String,String> names) {
-		return g.getNode(names.get(n1)).getEdge(edge, g.getNode(names.get(n2))) != null;
+	public HashMap<String,Node> check(Graph g) {
+		return new HashMap<String,Node>();
 	}
+	
+	public boolean isValid(Graph g, HashMap<String,Node> names) {
+		return false;
+	}
+	
 	
 	public String getEdge() {
 		return this.edge;

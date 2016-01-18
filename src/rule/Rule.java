@@ -49,25 +49,25 @@ public class Rule {
 					if (!n1.equals(n2) && !n1.equals(n3) && !n2.equals(n3)) {
 						boolean res = true;
 						int i = 0;
-						HashMap<String, String> mapNames = new HashMap<String, String>();
+						HashMap<String, Node> mapNames = new HashMap<String, Node>();
 
-						mapNames.put(this.names.get(0), n1.getName());
-						mapNames.put(this.names.get(1), n2.getName());
-						mapNames.put(this.names.get(2), n3.getName());
+						mapNames.put(this.names.get(0), n1);
+						mapNames.put(this.names.get(1), n2);
+						mapNames.put(this.names.get(2), n3);
 
 						while (res && i < facts.size()) {
 							res &= facts.get(i).isValid(g, mapNames);
 							i++;
 						}
 
-						Node z = g.getNode(mapNames.get(this.result.getN1()));
+		/*				Node z = g.getNode(mapNames.get(this.result.getN1()));
 						Node x = g.getNode(mapNames.get(this.result.getN2()));
 						
 						if (res && x.getEdge(this.result.getEdge(), z) == null) {
 							this.map.add(mapNames);
 							this.wasApplied = true;
 						}
-					}
+			*/		}
 				}
 			}
 		}
@@ -75,10 +75,10 @@ public class Rule {
 		for (HashMap<String, String> mapFound : this.map) {
 			Node n1 = newGraph.getNode(mapFound.get(this.result.getN1()));
 			Node n2 = newGraph.getNode(mapFound.get(this.result.getN2()));
-			if (n1.getEdge(this.result.getEdge(), n2) == null) {
+		/*	if (n1.getEdge(this.result.getEdge(), n2) == null) {
 				newGraph.addEdge(mapFound.get(this.result.getN1()), this.result.getEdge(),
 						mapFound.get(this.result.getN2()));
-			}
+			}*/
 		}
 		return newGraph;
 	}

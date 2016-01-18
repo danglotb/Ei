@@ -37,7 +37,7 @@ public class GraphReader {
 					
 					if ( (g.getNode(n2)) == null)
 						g.addNode(n2);
-					g.getNode(n1).addEdge(edge, g.getNode(n2));
+					//g.getNode(n1).addEdge(edge, g.getNode(n2));
 				} catch (NoSuchElementException e) {
 					//No need to had Edge so
 				}
