@@ -1,38 +1,32 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import core.Graph;
 import core.Node;
-import rule.Law;
-import rule.Rule;
+import program.Fact;
+import program.Rule;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		Graph g = io.GraphReader.read("graph");
+		Graph g = new Graph();
+		for (int i = 0 ; i < 8 ; i++) {
+			g.addNode(i+"");
+		}
 		
-		System.out.println(g);
+		for (int i = 0 ; i < 7 ; i++) {
+			g.addEdge(g.getNode(i+""), "E", g.getNode((i+1)+""));
+		}
 		
-		Rule r1 = new Rule("x", "p1" , "y");
-		r1.addFact("x", "E", "z");
-		r1.addFact("y", "E", "z");
+		Rule r = new Rule(new Fact("x", "p1", "y"));
+		r.addNeed(new Fact("x", "E", "z"));
+		r.addNeed(new Fact("z", "E", "y"));
+		HashMap<String, ArrayList<Node>> h = r.computeHomomorphisme(g);
 		
-		Rule r2 = new Rule("x", "p2" , "y");
-		r2.addFact("x", "p1", "z");
-		r2.addFact("y", "p1", "z");
-		
-		Rule r3 = new Rule("x", "p3" , "y");
-		r3.addFact("x", "p2", "z");
-		r3.addFact("y", "p2", "z");
-		
-		ArrayList<Rule> prog = new ArrayList<Rule>();
-		prog.add(r1);
-		prog.add(r2);
-		prog.add(r3);
-		
-		Graph g2 = Law.apply(prog, g);
-		
-		System.out.println(g2);
+		for (String key : h.keySet()) {
+			System.out.println(key+":"+h.get(key));
+		}
 		
 	}
 

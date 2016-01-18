@@ -77,8 +77,10 @@ public class Graph {
 	public String toString() {
 		String toString = "";
 		for (Node n : nodes) {
-			toString += n.toString() + "\t";
+			toString += n.toString() + " ";
 		}
+		
+		toString += "\n";
 		
 		for (Edge e : edges) {
 			toString += e.toString() + "\n";

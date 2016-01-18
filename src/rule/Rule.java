@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import core.Graph;
 import core.Node;
+import program.Fact;
 
 public class Rule {
 
@@ -56,7 +57,7 @@ public class Rule {
 						mapNames.put(this.names.get(2), n3);
 
 						while (res && i < facts.size()) {
-							res &= facts.get(i).isValid(g, mapNames);
+//							res &= facts.get(i).isValid(g, mapNames);
 							i++;
 						}
 
