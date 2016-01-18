@@ -43,7 +43,6 @@ public class Rule {
 					if (!homomorphisme.get(key).contains(n))
 						homomorphisme.get(key).add(n);
 				}
-				
 			}
 		}
 		

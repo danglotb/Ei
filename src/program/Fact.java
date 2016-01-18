@@ -35,26 +35,38 @@ public class Fact {
 			h.put(this.n1, new ArrayList<Node>());
 		if (!h.containsKey(this.n2))
 			h.put(this.n2, new ArrayList<Node>());
-		for (String s1 : names) {
-			for (String s2 : names) {
-				if (!s1.equals(s2)) {
-					if (g.getEdge(g.getNode(s1), this.edge, g.getNode(s2)) != null) {
-						boolean b1 = true, b2 = true;
-						for (String key : h.keySet()) {
-							try {
-								b1 &= !h.get(key).get(names.indexOf(s1)).equals(g.getNode(s1));
-								b2 &= !h.get(key).get(names.indexOf(s2)).equals(g.getNode(s2));
-							} catch (Exception e) {}
-						}
-						if (b1)
-							h.get(this.n1).add(g.getNode(s1));
-						if (b2)
-							h.get(this.n2).add(g.getNode(s2));
+		for (int i = 0 ; i < names.size() ; i++) {
+			for (int j = 0 ; j < names.size() ; j++) {
+				if (i != j) {
+					if (g.getEdge(g.getNode(names.get(i)), this.edge, g.getNode(names.get(i))) != null) {
+						
 					}
 				}
 			}
 		}
-		
+		for (String s1 : names) {
+			for (String s2 : names) {
+				if (!s1.equals(s2)) {
+					if (g.getEdge(g.getNode(s1), this.edge, g.getNode(s2)) != null) {
+						boolean b1 = false, b2 = false;
+						for (String key : h.keySet()) {
+							try {
+								b1 |= h.get(key).get(names.indexOf(s1)).equals(g.getNode(s1));
+							} catch (Exception e) {}
+							try {
+								b2 |= h.get(key).get(names.indexOf(s2)).equals(g.getNode(s2));
+							} catch (Exception e) {}
+						}
+						
+						if (!b1 && !b2) {
+							h.get(this.n1).add(g.getNode(s1));
+							h.get(this.n2).add(g.getNode(s2));
+						}
+					}
+				}
+			}
+		}
+
 		return h;
 	}
 
