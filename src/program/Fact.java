@@ -28,6 +28,10 @@ public class Fact {
 	public String getEdge() {
 		return this.edge;
 	}
+	
+	public boolean check(String n1, String n2, Graph g) {
+		return g.getEdge(g.getNode(n1), this.edge, g.getNode(n2)) != null;
+	}
 
 	public HashMap<String, ArrayList<Node>> check(Graph g, HashMap<String, ArrayList<Node>> h) {
 		ArrayList<String> names = g.getNames();

@@ -7,7 +7,7 @@ import program.Fact;
 import program.Rule;
 
 public class Main {
-
+	
 	public static void main(String[] args) {
 		
 		Graph g = new Graph();
@@ -22,7 +22,7 @@ public class Main {
 		Rule r = new Rule(new Fact("x", "p1", "y"));
 		r.addNeed(new Fact("x", "E", "z"));
 		r.addNeed(new Fact("z", "E", "y"));
-		HashMap<String, ArrayList<Node>> h = r.computeHomomorphisme(g);
+		HashMap<String, ArrayList<String>> h = r.compute(g);
 		
 		for (String key : h.keySet()) {
 			System.out.println(key+":"+h.get(key));
