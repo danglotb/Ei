@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import core.Graph;
-import core.Node;
 
 public class Rule {
 
@@ -18,16 +17,20 @@ public class Rule {
 		this.variables = new ArrayList<String>();
 	}
 
-	public void addNeed(Fact fact) {
+	public void addFact(Fact fact) {
 		this.facts.add(fact);
 		if (!this.variables.contains(fact.getN1()))
 			this.variables.add(fact.getN1());
 		if (!this.variables.contains(fact.getN2()))
 			this.variables.add(fact.getN2());
 	}
-
-	public Fact getResult() {
-		return this.result;
+	
+	public void addFact(String n1, String edge, String n2) {
+		this.facts.add(new Fact(n1, edge, n2));
+		if (!this.variables.contains(n1))
+			this.variables.add(n1);
+		if (!this.variables.contains(n2))
+			this.variables.add(n2);
 	}
 
 	private static void buildSubList(ArrayList<String> values, ArrayList<String> current,
@@ -50,17 +53,13 @@ public class Rule {
 	}
 
 	public HashMap<String, ArrayList<String>> compute(Graph g) {
-		
 		ArrayList<ArrayList<String>> names = new ArrayList<ArrayList<String>>();
 		buildSubList(g.getNames(), null, names, this.variables.size());
 		HashMap<String, ArrayList<String>> homomorphisme = new HashMap<String, ArrayList<String>>();
-		
 		for (ArrayList<String> map : names) {
 			boolean res = true;
-			for (Fact f : this.facts) {
+			for (Fact f : this.facts) 
 				res &= f.check(map.get(this.variables.indexOf(f.getN1())), map.get(this.variables.indexOf(f.getN2())), g);
-			}
-			
 			if (res) {
 				for (String variable : this.variables) {
 					if (!homomorphisme.containsKey(variable))

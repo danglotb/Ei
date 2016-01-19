@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import core.Graph;
-import core.Node;
 import program.Fact;
 import program.Rule;
 
@@ -20,8 +19,11 @@ public class Main {
 		}
 		
 		Rule r = new Rule(new Fact("x", "p1", "y"));
-		r.addNeed(new Fact("x", "E", "z"));
-		r.addNeed(new Fact("z", "E", "y"));
+		r.addFact(new Fact("x", "E", "z"));
+		r.addFact(new Fact("z", "E", "y"));
+		Rule r2 = new Rule(new Fact("x", "p2", "y"));
+		r2.addFact("x", "p1", "z");
+		r2.addFact("z", "p1", "x");
 		HashMap<String, ArrayList<String>> h = r.compute(g);
 		
 		for (String key : h.keySet()) {
