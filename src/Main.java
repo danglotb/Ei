@@ -18,6 +18,8 @@ public class Main {
 			g.addEdge(g.getNode(i+""), "E", g.getNode((i+1)+""));
 		}
 		
+		System.out.println(g);
+		
 		Rule r = new Rule(new Fact("x", "p1", "y"));
 		r.addFact(new Fact("x", "E", "z"));
 		r.addFact(new Fact("z", "E", "y"));

@@ -3,6 +3,7 @@ package program;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import core.Edge;
 import core.Graph;
 
 public class Rule {
@@ -68,6 +69,19 @@ public class Rule {
 				}
 			}
 		}
+		
+		ArrayList<Edge> intentionnal = new ArrayList<Edge>();
+		
+		ArrayList<String> listN1 = homomorphisme.get(this.result.getN1());
+		ArrayList<String> listN2 = homomorphisme.get(this.result.getN2());
+		
+		System.out.println(listN1);
+		System.out.println(listN2);
+		
+		for (int i = 0 ; i < listN1.size() ; i++)
+			intentionnal.add(new Edge (g.getNode(listN1.get(i)), this.result.getEdge(), g.getNode(listN2.get(i))));
+		
+		System.out.println(intentionnal);
 		return homomorphisme;
 	}
 
