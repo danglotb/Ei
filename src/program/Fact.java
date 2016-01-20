@@ -4,8 +4,8 @@ import core.Graph;
 
 public class Fact {
 
-	private String n1, n2;
-	private String edge;
+	private final String n1, n2;
+	private final String edge;
 
 	public Fact(String n1, String edge, String n2) {
 		this.edge = edge;

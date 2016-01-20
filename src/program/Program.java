@@ -33,7 +33,17 @@ public class Program {
 			this.rules.add(rule);
 	}
 	
-	public void run() {
+	public void run(Graph g) {
+		
+		for (Rule r : initial) {
+			schemeInt.addAll(r.compute(g));
+		}
+		
+		ArrayList<Edge> ret = null;
+		
+		do {
+			
+		} while (ret != null);
 		
 	}
 
