@@ -33,6 +33,16 @@ public class Rule {
 		if (!this.variables.contains(n2))
 			this.variables.add(n2);
 	}
+	
+	public boolean isInitial(Graph g) {
+		boolean res = true;
+		for (Fact f : facts) {
+			res &= g.contains(f.getEdge());
+			if(!res)
+				return false;
+		}
+		return res;
+	}
 
 	private static void buildSubList(ArrayList<String> values, ArrayList<String> current,
 			ArrayList<ArrayList<String>> solution, int k) {
@@ -53,7 +63,7 @@ public class Rule {
 		}
 	}
 
-	public HashMap<String, ArrayList<String>> compute(Graph g) {
+	public ArrayList<Edge> compute(Graph g) {
 		ArrayList<ArrayList<String>> names = new ArrayList<ArrayList<String>>();
 		buildSubList(g.getNames(), null, names, this.variables.size());
 		HashMap<String, ArrayList<String>> homomorphisme = new HashMap<String, ArrayList<String>>();
@@ -75,14 +85,10 @@ public class Rule {
 		ArrayList<String> listN1 = homomorphisme.get(this.result.getN1());
 		ArrayList<String> listN2 = homomorphisme.get(this.result.getN2());
 		
-		System.out.println(listN1);
-		System.out.println(listN2);
-		
 		for (int i = 0 ; i < listN1.size() ; i++)
 			intentionnal.add(new Edge (g.getNode(listN1.get(i)), this.result.getEdge(), g.getNode(listN2.get(i))));
 		
-		System.out.println(intentionnal);
-		return homomorphisme;
+		return intentionnal;
 	}
 
 	

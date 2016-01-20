@@ -64,6 +64,14 @@ public class Graph {
 	public ArrayList<Node> getNodes() {
 		return this.nodes;
 	}
+	
+	public boolean contains(String edge) {
+		for (Edge e : this.edges) {
+			if (e.equals(edge))
+					return true;
+		}
+		return false;
+	}
 
 	public ArrayList<String> getNames() {
 		ArrayList<String> names = new ArrayList<String>();
