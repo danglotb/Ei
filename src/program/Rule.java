@@ -16,6 +16,10 @@ public class Rule {
 		this.result = result;
 		this.facts = new ArrayList<Fact>();
 		this.variables = new ArrayList<String>();
+		if (!this.variables.contains(result.getN1()))
+			this.variables.add(result.getN1());
+		if (!this.variables.contains(result.getN2()))
+			this.variables.add(result.getN2());
 	}
 
 	public void addFact(Fact fact) {
@@ -69,8 +73,9 @@ public class Rule {
 		HashMap<String, ArrayList<String>> homomorphisme = new HashMap<String, ArrayList<String>>();
 		for (ArrayList<String> map : names) {
 			boolean res = true;
-			for (Fact f : this.facts) 
+			for (Fact f : this.facts) {
 				res &= f.check(map.get(this.variables.indexOf(f.getN1())), map.get(this.variables.indexOf(f.getN2())), g);
+			}
 			if (res) {
 				for (String variable : this.variables) {
 					if (!homomorphisme.containsKey(variable))
@@ -85,9 +90,12 @@ public class Rule {
 		ArrayList<String> listN1 = homomorphisme.get(this.result.getN1());
 		ArrayList<String> listN2 = homomorphisme.get(this.result.getN2());
 		
+		if (listN1 == null || listN2 == null)
+			return null;
+		
 		for (int i = 0 ; i < listN1.size() ; i++)
 			intentionnal.add(new Edge (g.getNode(listN1.get(i)), this.result.getEdge(), g.getNode(listN2.get(i))));
-		
+
 		return intentionnal;
 	}
 

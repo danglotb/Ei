@@ -61,6 +61,10 @@ public class Graph {
 		return null;
 	}
 	
+	public ArrayList<Edge> getEdges() {
+		return this.edges;
+	}
+	
 	public ArrayList<Node> getNodes() {
 		return this.nodes;
 	}

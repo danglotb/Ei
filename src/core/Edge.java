@@ -37,7 +37,7 @@ public class Edge {
 	}
 	
 	public String toString() {
-		return this.origin + "->" + this.target.getName();
+		return this.origin + " " + this.name + " "+ this.target.getName();
 	}
 	
 }
