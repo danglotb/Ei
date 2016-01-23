@@ -93,8 +93,11 @@ public class Rule {
 		if (listN1 == null || listN2 == null)
 			return null;
 		
-		for (int i = 0 ; i < listN1.size() ; i++)
-			intentionnal.add(new Edge (g.getNode(listN1.get(i)), this.result.getEdge(), g.getNode(listN2.get(i))));
+		for (int i = 0 ; i < listN1.size() ; i++) {
+			Edge newEdge = new Edge (g.getNode(listN1.get(i)), this.result.getEdge(), g.getNode(listN2.get(i)));
+			if (!g.contains(newEdge))
+				intentionnal.add(newEdge);
+		}
 
 		return intentionnal;
 	}

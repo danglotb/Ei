@@ -36,28 +36,27 @@ public class Program {
 			else
 				rules.add(r);
 		}
-	
-
+		
 		Graph intentionnal = g.copy();
 
 		ArrayList<Edge> initialEdge = new ArrayList<Edge>();
 
 		for (Rule r : initial)
 			initialEdge.addAll(r.compute(g));
-
+		
 		if (initialEdge.isEmpty()) {
 			System.err.println("Could not apply any initial rule to the instance");
 			System.exit(-1);
 		} else
 			intentionnal.getEdges().addAll(initialEdge);
-
+		
 		while (true) {
 			
 			ArrayList<ArrayList<Edge>> edges = new ArrayList<ArrayList<Edge>>();
 			
 			for (Rule r : rules) {
-				ArrayList<Edge> tmp = r.compute(g);
-				if (tmp != null)
+				ArrayList<Edge> tmp = r.compute(intentionnal);
+				if (tmp.size() > 0)
 					edges.add(tmp);
 			}
 			
@@ -77,6 +76,11 @@ public class Program {
 		
 		if (intentionnal.contains(this.goal.getEdge())) {
 			System.out.println("Goal found on :");
+			for (Edge e : intentionnal.getEdges()) {
+				if (e.equals(this.goal.getEdge())){
+					System.out.println("\t"+	e);
+				}
+			}
 		} else
 			System.out.println("Goal not found");
 

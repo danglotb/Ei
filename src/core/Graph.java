@@ -32,9 +32,17 @@ public class Graph {
 	public void addNode(Node n) {
 		this.nodes.add(n);
 	}
-
+	
 	public void addNode(String name) {
 		this.nodes.add(new Node(name));
+	}
+	
+	public void addEdge(String n1, String edge, String n2) {
+		if (this.getNode(n1) == null)
+			this.addNode(new Node(n1));
+		if (this.getNode(n2) == null)
+			this.addNode(new Node(n2));
+		this.edges.add(new Edge(this.getNode(n1), edge, this.getNode(n2)));
 	}
 	
 	public void addEdge(Node n1, String edge, Node n2) {
@@ -67,6 +75,14 @@ public class Graph {
 	
 	public ArrayList<Node> getNodes() {
 		return this.nodes;
+	}
+	
+	public boolean contains(Edge edge) {
+		for (Edge e : this.edges) {
+			if (e.equals(edge))
+				return true;
+		}
+		return false;
 	}
 	
 	public boolean contains(String edge) {

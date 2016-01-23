@@ -1,0 +1,70 @@
+Benjamin DANGLOT M2MOCAD
+
+Extraction d'Information - Interpreteur Datalog
+
+####
+#
+#	Creation de la base de données
+#
+####
+
+	Pour simplifier, les élements de la base sont tous des strings (noeuds et arcs)
+
+	On commence par créer un objet de type Graph : Graph g = new Graph();
+	
+	Puis on peut ajouter des éléments au graph : 
+	
+		* Node : g.addNode(String name);
+		* Edge : g.addEdge(String node1, String edge, String node2);
+		
+	Si on ajoute une Edge entre deux Node qui n'existe pas, le graph créera les Node.
+	
+	Par exemple : 
+			for (int i = 0 ; i < 7 ; i++)
+				g.addEdge(new String(i+""), "E", new String(""+(i+1)));
+			
+			la boucle va ajouter les noeuds de 0 à 7, avec le noeud i reliés par un arc "E" au noeud i+1.
+	
+####
+#
+#	Creation du programme
+#
+####
+
+	De même que la base de donnée, les objets utilisent principalement des strings.
+
+	Un programme est un ensemble (une ArrayList ici) de règles (objet Rule), et une règle est un ensemble de faits (objet Fact).
+
+	* Construction d'un objet Fact : new Fact(node1, edge, node2) : exemple pour crée le fait E(x,y), on utilise new Fact("x", "E", "y");
+	
+	* Construction d'un objet Rule : new Rule(resultat) : avec resultat le fait resultat de la règle.
+	  On ajoute ensuite les faits necessaires à la règle avec addFact(fait).
+	  
+	  Par exemple la règle p1(x,y) :- E(x,z) E(z,y) correspond à : 
+	  		
+	  		Rule r = new Rule(new Fact("x", "p1" , "y"));//Fait resultat
+	  		r.add(new Fact("x", "E", "z"));//Premier fait necessaire
+	  		r.add(new Fact("z", "E", "y"));//deuxime fait necessaire
+	  		
+	* Construction d'un objet Program : new Program(faitBut, listDeRegles) : avec faitBut le Goal du programme, 
+	  et listDeRegles, une ArrayList<Rule> contenant l'ensemble des règle du programme.
+	  
+	  On continue avec le même exemepl : 
+	  		ArrayList<Rule> list = new ArrayList<Rule>();//creation de la liste
+	  		list.add(r);//ajout de la seule regle presente
+	  		Program p = new Program(new Fact("x", "p1", "y"), list);//creation du programme
+	  		p.run(g);//Execution du programme sur l'instance g.
+	  		
+	  A la fin, le programme affiche si il a trouvé le but, et quels noeuds répondent au but.
+	  		
+####
+#
+#	Application
+#
+####
+
+	On trouve 3 packages dans l'application : 
+		* default : contient un main, avec l'exemple du cours.
+		* core : contient les trois classes relatives à la base de données.
+		* program : contient les trois classes relatives au programme.
+		
